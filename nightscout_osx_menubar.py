@@ -6,6 +6,7 @@ import webbrowser
 from ConfigParser import ConfigParser
 from datetime import datetime
 
+import hashlib
 import requests
 import rumps
 import simplejson
@@ -43,6 +44,7 @@ class NightscoutConfig(object):
     FILENAME = 'config'
     SECTION = 'NightscoutMenubar'
     HOST = 'nightscout_host'
+    API_SECRET = 'api_secret'
     USE_MMOL = 'use_mmol'
 
     def __init__(self, app_name):
@@ -53,6 +55,8 @@ class NightscoutConfig(object):
             self.config.add_section(self.SECTION)
         if not self.config.has_option(self.SECTION, self.HOST):
             self.set_host('')
+        if not self.config.has_option(self.SECTION, self.API_SECRET):
+            self.set_api_secret('')
         if not self.config.has_option(self.SECTION, self.USE_MMOL):
             self.set_use_mmol(False)
 
@@ -61,6 +65,14 @@ class NightscoutConfig(object):
 
     def set_host(self, host):
         self.config.set(self.SECTION, self.HOST, host)
+        with open(self.config_path, 'w') as f:
+            self.config.write(f)
+
+    def get_api_secret(self):
+        return self.config.get(self.SECTION, self.API_SECRET)
+
+    def set_api_secret(self, api_secret):
+        self.config.set(self.SECTION, self.API_SECRET, api_secret)
         with open(self.config_path, 'w') as f:
             self.config.write(f)
 
@@ -105,6 +117,7 @@ def post_history_menu_options():
                 mmol,
                 None,
                 rumps.MenuItem('Set Nightscout URL...', callback=configuration_window),
+                rumps.MenuItem('Set API Secret...', callback=api_secret_window),
                 rumps.MenuItem('Help...', callback=open_project_homepage),
                 None,
                 "Version {}".format(VERSION)
@@ -121,12 +134,19 @@ def get_entries(retries=0, last_exception=None):
         print "Retried too many times: %s" % last_exception
         raise NightscoutException(last_exception)
 
+    headers = {
+        'API-SECRET': hashlib.new(
+            'sha1',
+            config.get_api_secret().encode()
+        ).hexdigest()
+    } if config.get_api_secret() else {}
     try:
         resp = requests.get(
             config.get_host() + SGVS_PATH.format(count=(HISTORY_LENGTH + 1)),
             # For the sake of keeping this portable without adding a lot of complexity, don't verify SSL certificates.
             # https://github.com/kennethreitz/requests/issues/557
             verify=False,
+            headers=headers,
             # Don't let bad connectivity cause the app to freeze
             timeout=REQUEST_TIMEOUT_SECONDS,
         )
@@ -231,6 +251,20 @@ def configuration_window(sender):
     response = window.run()
     if response.clicked == 1:
         config.set_host(response.text.strip())
+        update_data(None)
+
+def api_secret_window(sender):
+    window = rumps.Window(
+        title='Nightscout Menubar Configuration',
+        message='Enter your Nightscout API Secret below.',
+        dimensions=(320, 22),
+    )
+    window.default_text = config.get_api_secret()
+    window.add_buttons('Cancel')
+
+    response = window.run()
+    if response.clicked == 1:
+        config.set_api_secret(response.text.strip())
         update_data(None)
 
 def open_project_homepage(sender):
