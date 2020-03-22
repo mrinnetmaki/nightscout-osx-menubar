@@ -13,7 +13,7 @@ import simplejson
 
 VERSION = '0.3.3'
 APP_NAME = 'Nightscout Menubar'
-PROJECT_HOMEPAGE = 'https://github.com/mddub/nightscout-osx-menubar'
+PROJECT_HOMEPAGE = 'https://github.com/mrinnetmaki/nightscout-osx-menubar'
 
 SGVS_PATH = '/api/v1/entries/sgv.json?count={count}'
 UPDATE_FREQUENCY_SECONDS = 20
