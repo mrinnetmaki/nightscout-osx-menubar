@@ -20,7 +20,7 @@ UPDATE_FREQUENCY_SECONDS = 20
 MAX_SECONDS_TO_SHOW_DELTA = 600
 HISTORY_LENGTH = 5
 MAX_BAD_REQUEST_ATTEMPTS = 3
-REQUEST_TIMEOUT_SECONDS = 2
+REQUEST_TIMEOUT_SECONDS = 7
 
 ################################################################################
 # Display options
