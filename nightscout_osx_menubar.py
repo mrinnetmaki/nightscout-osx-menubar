@@ -87,7 +87,7 @@ class NightscoutConfig(object):
 config = NightscoutConfig(APP_NAME)
 
 def maybe_convert_units(mgdl):
-    return round(mgdl / 18.0, 1) if config.get_use_mmol() else mgdl
+    return round(mgdl / 18.0156, 1) if config.get_use_mmol() else mgdl
 
 def update_menu(title, items):
     app.title = title
