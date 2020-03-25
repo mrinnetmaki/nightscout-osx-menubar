@@ -2,9 +2,11 @@
 
 View CGM data from [Nightscout] in the OS X menu bar.
 
-**Latest version: 0.3.3**
+Forked from Mark Wilson's [repo][original nightscout-osx-menubar project].
 
-![nightscout-osx-menubar screenshot](https://raw.githubusercontent.com/mddub/nightscout-osx-menubar/master/screenshot.png)
+**Latest version: 0.3.4**
+
+![nightscout-osx-menubar screenshot](https://raw.githubusercontent.com/mrinnetmaki/nightscout-osx-menubar/master/screenshot.png)
 
 ## Requirements
 
@@ -76,10 +78,11 @@ This project is intended for educational and informational purposes only. It is 
 
 [Nightscout]: http://www.nightscout.info/
 [cgm-remote-monitor]: https://github.com/nightscout/cgm-remote-monitor
-[release-zip]: https://github.com/mddub/nightscout-osx-menubar/raw/master/release/nightscout-osx-menubar-0.3.3.zip
-[nightscout_osx_menubar.py]: https://github.com/mddub/nightscout-osx-menubar/blob/master/nightscout_osx_menubar.py
+[original nightscout-osx-menubar project]: https://github.com/mddub/nightscout-osx-menubar/
+[release-zip]: https://github.com/mrinnetmaki/nightscout-osx-menubar/raw/master/release/nightscout-osx-menubar-0.3.4.zip
+[nightscout_osx_menubar.py]: https://github.com/mrinnetmaki/nightscout-osx-menubar/blob/master/nightscout_osx_menubar.py
 [rumps]: https://github.com/jaredks/rumps
 [py2app]: https://pythonhosted.org/py2app/
 [rumps-virtualenv]: https://github.com/jaredks/rumps/issues/9
 [xcode-cli]: http://stackoverflow.com/questions/20929689/git-clone-command-not-working-in-mac-terminal
-[file an issue]: https://github.com/mddub/nightscout-osx-menubar/issues
+[file an issue]: https://github.com/mrinnetmaki/nightscout-osx-menubar/issues

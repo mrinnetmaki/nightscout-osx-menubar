@@ -1,4 +1,4 @@
-py2app==0.9
-requests==2.7.0
-rumps==0.2.1
-simplejson==3.8.0
+py2app==0.21
+requests==2.23.0
+rumps==0.3.0
+simplejson==3.17.0

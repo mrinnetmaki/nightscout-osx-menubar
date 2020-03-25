@@ -11,16 +11,16 @@ import requests
 import rumps
 import simplejson
 
-VERSION = '0.3.3'
+VERSION = '0.3.4'
 APP_NAME = 'Nightscout Menubar'
-PROJECT_HOMEPAGE = 'https://github.com/mddub/nightscout-osx-menubar'
+PROJECT_HOMEPAGE = 'https://github.com/mrinnetmaki/nightscout-osx-menubar'
 
 SGVS_PATH = '/api/v1/entries/sgv.json?count={count}'
 UPDATE_FREQUENCY_SECONDS = 20
 MAX_SECONDS_TO_SHOW_DELTA = 600
 HISTORY_LENGTH = 5
 MAX_BAD_REQUEST_ATTEMPTS = 3
-REQUEST_TIMEOUT_SECONDS = 2
+REQUEST_TIMEOUT_SECONDS = 7
 
 ################################################################################
 # Display options
@@ -87,7 +87,7 @@ class NightscoutConfig(object):
 config = NightscoutConfig(APP_NAME)
 
 def maybe_convert_units(mgdl):
-    return round(mgdl / 18.0, 1) if config.get_use_mmol() else mgdl
+    return round(mgdl / 18.0156, 1) if config.get_use_mmol() else mgdl
 
 def update_menu(title, items):
     app.title = title
