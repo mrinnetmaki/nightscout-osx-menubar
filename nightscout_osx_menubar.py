@@ -11,16 +11,16 @@ import requests
 import rumps
 import simplejson
 
-VERSION = '0.3.4'
+VERSION = '0.3.5'
 APP_NAME = 'Nightscout Menubar'
 PROJECT_HOMEPAGE = 'https://github.com/mrinnetmaki/nightscout-osx-menubar'
 
 SGVS_PATH = '/api/v1/entries/sgv.json?count={count}'
-UPDATE_FREQUENCY_SECONDS = 20
+UPDATE_FREQUENCY_SECONDS = 150
 MAX_SECONDS_TO_SHOW_DELTA = 600
 HISTORY_LENGTH = 5
 MAX_BAD_REQUEST_ATTEMPTS = 3
-REQUEST_TIMEOUT_SECONDS = 7
+REQUEST_TIMEOUT_SECONDS = 15
 
 ################################################################################
 # Display options
@@ -163,6 +163,7 @@ def get_entries(retries=0, last_exception=None):
 
     try:
         arr = resp.json()
+        print "Got nightscout data: %s" % repr(arr)
         if type(arr) == list and (len(arr) == 0 or type(arr[0]) == dict):
             return arr
         else:
